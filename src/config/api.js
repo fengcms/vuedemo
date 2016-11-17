@@ -1,12 +1,12 @@
-//var root = 'http://192.168.12.126:8021/api/v2';
-var root = '//tdq.yaoyingli.com/api/v2';
-
+// 配置API接口地址
+var root = 'https://cnodejs.org/api/v1';
+// 引用superagent
 var request = require('superagent');
-var toType = function(obj) {
+// 自定义判断元素类型JS
+function toType(obj) {
   return ({}).toString.call(obj).match(/\s([a-zA-Z]+)/)[1].toLowerCase()
 }
-
-
+// 参数过滤函数
 function filter_null(o) {
   for (var key in o) {
     if (o[key] == null) {
@@ -21,9 +21,15 @@ function filter_null(o) {
   }
   return o
 }
-
+/*
+  接口处理函数
+  这个函数每个项目都是不一样的，我现在调整的是适用于
+  https://cnodejs.org/api/v1 的接口，如果是其他接口
+  需要根据接口的参数进行调整。参考说明文档地址：
+  https://cnodejs.org/topic/5378720ed6e2d16149fa16bd
+*/
 function _api_base(method, url, params, success, failure) {
-  var r = request(method, url).type('text/plain').withCredentials()
+  var r = request(method, url).type('text/plain')
   if (params) {
     params = filter_null(params);
     if (method === 'POST' || method === 'PUT') {
@@ -37,15 +43,10 @@ function _api_base(method, url, params, success, failure) {
   }
   r.end(function(err, res) {
     if (err) {
-      if (res.status == 401) {
-        // location.href = '/html/#!/login'
-        alert('登录过期，请关闭页面后重新打开')
-      } else {
-        alert('api error, HTTP CODE: ' + res.status);
-        return;
-      };
+      alert('api error, HTTP CODE: ' + res.status);
+      return;
     };
-    if (res.body.status == 0) {
+    if (res.body.success == true) {
       if (success) {
         success(res.body);
       }
@@ -58,7 +59,7 @@ function _api_base(method, url, params, success, failure) {
     }
   });
 };
-
+// 返回在vue模板中的调用接口
 export default {
   get: function(url, params, success, failure) {
     return _api_base('GET', root + '/' + url, params, success, failure)
