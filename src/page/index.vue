@@ -8,9 +8,9 @@
 </template>
 <script>
 export default {
-  data() {
+  data () {
     return {
-      lists:[]
+      lists: []
     }
   },
   created () {
@@ -19,13 +19,12 @@ export default {
     this.get_data()
   },
   methods: {
-    get_data: function(params) {
-      var v = this
+    get_data (params) {
       if (!params) params = {}
-      v.$api.get('topics', params, function(r) {
-          v.lists = r.data
+      this.$api.get('topics', params, r => {
+        this.lists = r.data
       })
-    },
-  },
+    }
+  }
 }
 </script>

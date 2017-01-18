@@ -21,9 +21,9 @@ export default [
     path: '/user',
     component: Frame,
     children: [
-      {path: '/',component: userIndex},
-      {path: 'info',component: userInfo},
-      {path: 'love',component: userLove}
-    ],
-  },
+      {path: '/', component: userIndex},
+      {path: 'info', component: userInfo},
+      {path: 'love', component: userLove}
+    ]
+  }
 ]
