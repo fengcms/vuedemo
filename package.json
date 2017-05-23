@@ -17,6 +17,7 @@
   },
   "devDependencies": {
     "autoprefixer": "^6.4.0",
+    "axios": "^0.16.1",
     "babel-core": "^6.0.0",
     "babel-eslint": "^7.0.0",
     "babel-loader": "^6.0.0",
@@ -68,7 +69,6 @@
     "shelljs": "^0.7.4",
     "sinon": "^1.17.3",
     "sinon-chai": "^2.8.0",
-    "superagent": "^2.3.0",
     "url-loader": "^0.5.7",
     "vue-loader": "^9.4.0",
     "vue-router": "^2.0.2",
